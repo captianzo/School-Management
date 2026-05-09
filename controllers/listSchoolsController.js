@@ -44,7 +44,7 @@ export const listSchools = async (req, res) => {
 		const sortedSchools = schools.map((school) => ({
 			...school,
 			distance: haversineDistance(userLatitude, userLongitude, school.latitude, school.longitude)
-		})).sort((a, b) => { a.distance - b.distance });
+		})).sort((a, b) => a.distance - b.distance);
 
 		res.status(200).json({
 			message: 'Schools fetched successfully',
