@@ -1,11 +1,15 @@
 import express from 'express';
-const app = express()
-const port = 3000
+import dotenv from 'dotenv';
+import schoolRoutes from './routes/schoolRoutes.js';
+dotenv.config();
 
-app.get('/addSchool', (req, res) => {
-	
-})
+const PORT = process.env.PORT;
 
-app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`)
+const app = express();
+app.use(express.json());
+
+app.use('/api', schoolRoutes);
+
+app.listen(process.env.PORT, () => {
+	console.log(`Example app listening on port ${PORT}`)
 })
