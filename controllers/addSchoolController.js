@@ -19,18 +19,21 @@ export const addSchool = async (req, res) => {
 		return res.status(400).json({error: 'Latitude and Longitude must be valid numbers'});
 	}
 
-	if (latitude < -90 || latitude > 90){
+	const parsedLatitude = parseFloat(latitude);
+	const parsedLongitude = parseFloat(longitude);
+
+	if (parsedLatitude < -90 || parsedLatitude > 90){
 		return res.status(400).json({error: 'Latitude must be between -90 to 90'});
 	}
 
-	if (longitude < -180 || longitude > 180){
+	if (parsedLongitude < -180 || parsedLongitude > 180){
 		return res.status(400).json({error: 'Longitude must be between -180 to 180'});
 	}
 
 	try {
 		const [result] = await db.execute(
 			'INSERT INTO schools (name, address, latitude, longitude) VALUES (?, ?, ?, ?)',
-			[name.trim(), address.trim(), latitude, longitude]
+			[name.trim(), address.trim(), parsedLatitude, parsedLongitude]
 		);
 
 		res.status(201).json({
