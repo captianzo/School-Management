@@ -7,11 +7,11 @@ export const addSchool = async (req, res) => {
 		return res.status(400).json({error: 'All fields are required: name, address, latitude, longitude'});
 	}
 
-	if (typeof name !== 'string' || name.trim === ''){
+	if (typeof name !== 'string' || name.trim() === ''){
 		return res.status(400).json({error: 'Name must be non-empty'});
 	}
 
-	if (typeof address !== 'string' || address.trim === ''){
+	if (typeof address !== 'string' || address.trim() === ''){
 		return res.status(400).json({error: 'Address must be non-empty'});
 	}
 
